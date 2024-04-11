@@ -1,18 +1,26 @@
 "use client";
 
-import { useDashboard } from "@/context/dashboard-context";
+import { useDashboard, LOADING_TIME } from "@/context/dashboard-context";
 import classNames from "classnames";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaSpinner } from "react-icons/fa";
 
 export default function MedicalRecordUpload() {
-    const { medicalRecord, setMedicalRecord } = useDashboard();
+    const { medicalRecord, setMedicalRecord, isLoading, setLoading } = useDashboard();
 
     const handleClick = () => {
-        setMedicalRecord({ url: "/assets/medical-record.pdf" });
+        setLoading(true);
+        setTimeout(
+            () => {
+                setLoading(false);
+                setMedicalRecord({ url: "/assets/medical-record.pdf" })
+            },
+            LOADING_TIME
+        );
     }
 
     return(
         <div className="w-1/2 h-64 border border-4 border-gray-200 border-dashed rounded flex flex-row items-center justify-center">
+            {isLoading && (<FaSpinner />)}
             <button
                 className={classNames(
                     "text-white font-medium py-2 px-4 rounded border border-2",
@@ -20,7 +28,9 @@ export default function MedicalRecordUpload() {
                 )}
                 onClick={handleClick}
             >
-                {medicalRecord === null && (<span>Simulate Medical Record Upload</span>)}
+                {medicalRecord === null && (
+                    <span>Simulate Medical Record Upload</span>
+                )}
                 {medicalRecord !== null && (
                     <span className="text-green-600 flex flex-row gap-1 items-center">
                         <FaCheck />
