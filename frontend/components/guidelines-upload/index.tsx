@@ -12,6 +12,9 @@ export default function GuidelinesUpload() {
     const { medicalRecord, guidelinesFile, setGuidelinesFile, isLoading, setLoading } = useDashboard();
 
     const handleClick = () => {
+        if (guidelinesFile) {
+            return;
+        }
         if (!medicalRecord) {
             toast.error('Need to upload Medical Record before Guidelines upload', {
                 position: "top-left",

@@ -4,6 +4,7 @@ import GuidelinesUpload from "@/components/guidelines-upload";
 import MedicalRecordUpload from "@/components/medical-record-upload";
 import { useRouter } from "next/navigation";
 import { useDashboard } from "@/context/dashboard-context";
+import { API as CaseAPI } from "@/api/cases";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,7 +16,9 @@ export default function DashboardRoot() {
 	const CASE_ID = "case_891a_6fbl_87d1_4326";
 	const { guidelinesFile, medicalRecord } = useDashboard();
 
-	const handleContinue = () => {
+	const handleContinue = async () => {
+		// console.log('CaseAPI.getCases():', await CaseAPI.getCases());
+		console.log('CaseAPI.createCase():', await CaseAPI.createCase());
 		router.push(`/dashboard/case/${CASE_ID}`)
 	}
 

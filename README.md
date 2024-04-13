@@ -1,42 +1,57 @@
+# Installation and Run
+
 View instructions for completing this take-home assignment [here](https://co-helm.notion.site/Senior-Product-Engineer-Take-Home-6e82ec45cc2a46b59a0d9ee3aeb9449c).
 
-## To install:
+## Installation
 
 Better to create virtual environment for Python (backend). There are multiple ways of doing this, this is one of them, using the standard `venv` module (from project home folder):
+
+### Create python virtual environment
 
 ```:shell
 python -m venv .env
 ```
 
-Activate virtual env:
+### Activate virtual env
 
-### macOS/Linux
+macOS/Linux:
 
 ```:shell
 source .env/bin/activate
 ```
 
-### Windows
+Windows:
 
 ```:shell
 .env\bin\activate
 ```
 
-Then install python modules in package:
+### Then install python modules in package
+
+Note: _fastapi_ was upgraded from _0.105.0_ to _0.109.0_ because of vulnerabilities in 0.105 version.
+_uvicorn_ added to run _fastapi_ backend.
 
 ```:shell
 cd backend
 pip install -r requirements.txt
 ```
 
-Install frontend libraries (from project home folder):
+### Run backend (API)
+
+```:shell
+uvicorn main:app --reload
+```
+
+Note: _--reload_ parameter is optional for easier development and debugging, it should be removed in production.
+
+### Install frontend libraries (from project home folder)
 
 ```:shell
 cd frontend
 npm install
 ```
 
-Run:
+### Run frontend
 
 ```:shell
 npm run dev

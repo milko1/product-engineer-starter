@@ -8,6 +8,9 @@ export default function MedicalRecordUpload() {
     const { medicalRecord, setMedicalRecord, isLoading, setLoading } = useDashboard();
 
     const handleClick = () => {
+        if (medicalRecord) {
+            return;
+        }
         setLoading(true);
         setTimeout(
             () => {
