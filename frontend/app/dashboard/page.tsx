@@ -13,13 +13,12 @@ export const revalidate = 0;
 // export default async function DashboardRoot() { // cannot use async in client components in this version of NextJS
 export default function DashboardRoot() {
 	const router = useRouter();
-	const CASE_ID = "case_891a_6fbl_87d1_4326";
+	// const CASE_ID = "case_891a_6fbl_87d1_4326";
 	const { guidelinesFile, medicalRecord } = useDashboard();
 
 	const handleContinue = async () => {
-		// console.log('CaseAPI.getCases():', await CaseAPI.getCases());
-		console.log('CaseAPI.createCase():', await CaseAPI.createCase());
-		router.push(`/dashboard/case/${CASE_ID}`)
+		const caseData = (await CaseAPI.createCase()).message;
+		router.push(`/dashboard/case/${caseData.case_id}`)
 	}
 
 	return (

@@ -13,7 +13,7 @@ interface IDashboardContext {
     guidelinesFile: IUploadedFile | null;
     setGuidelinesFile: (file: IUploadedFile | null) => void;
     // Using this flag for both uploads for simplicity,
-    // but depending on typical usage maybe it would be better to use different flags for each:
+    // but depending on real use maybe it would be better to use different flags for each:
     isLoading: boolean;
     setLoading: (isLoading: boolean) => void;
 }
@@ -24,7 +24,7 @@ const INITIAL_STATE: IDashboardContext = {
     guidelinesFile: null,
     setGuidelinesFile: () => {},
     isLoading: false,
-    setLoading: () => {}
+    setLoading: () => {},
 };
 
 export const DashboardContext = createContext(INITIAL_STATE);

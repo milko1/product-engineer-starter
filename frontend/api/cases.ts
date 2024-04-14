@@ -1,6 +1,9 @@
 /*
   Using JS/TS native web client, instead of Axios or other widely used web client libraries.
   For demo purposes, using less dependencies, simpler, and showing how these work.
+  
+  Note I'm forcing NextJS to just avoid caching, as make sure I'm getting latest,
+    it might not be the best idea for production and might be better a timed/smarter caching.
 */
 
 
@@ -14,7 +17,7 @@ enum CaseStatus {
   DENIED = 'denied'
 }
 
-interface Case { // not used as of now, but useful if processing this data on the client-side, to add type-checks
+export interface Case { // not used as of now, but useful if processing this data on the client-side, to add type-checks
   case_id: string;
   created_at: Date;
   status: CaseStatus;
@@ -29,7 +32,7 @@ export class API {
 
   static async getCases () {
     try {
-      const res = await fetch(`${API_URL}/cases`)
+      const res = await fetch(`${API_URL}/cases`, { cache: 'no-store' })
       if (!res.ok) {
         throw new Error(`Error fetching data from ${API_URL}`);
       }
@@ -43,7 +46,7 @@ export class API {
 
   static async getCase (case_id: string) {
     try {
-      const res = await fetch(`${API_URL}/cases/${case_id}`)
+      const res = await fetch(`${API_URL}/cases/${case_id}`, { cache: 'no-store' })
       if (!res.ok) {
         throw new Error(`Error fetching data from ${API_URL}`);
       }
