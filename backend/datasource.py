@@ -66,7 +66,6 @@ class DataAccessLayer:
             response_no = 2
         else:
             response_no = 3
-        print(f'time_diff={time_diff}')
 
         with open(f"../assets/response-{response_no}.json", encoding="UTF8") as file:
             json_data = json.load(file)

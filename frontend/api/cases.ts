@@ -9,12 +9,13 @@
 
 const API_URL = 'http://localhost:8000';
 
-enum CaseStatus {
+export enum CaseStatus {
   SUBMITTED = 'submitted',
   CREATED = 'created',
   DELETED = 'deleted',
   APPROVED = 'approved',
-  DENIED = 'denied'
+  DENIED = 'denied',
+  COMPLETE = 'complete',
 }
 
 export interface Case { // not used as of now, but useful if processing this data on the client-side, to add type-checks
@@ -40,6 +41,7 @@ export class API {
       return data;
     } catch (error) {
       console.error(`Error fetching data from ${API_URL}:`, error);
+      throw new Error(`Error connecting to ${API_URL}`);
     }
   }
 
@@ -54,6 +56,7 @@ export class API {
       return data;
     } catch (error) {
       console.error(`Error fetching data from ${API_URL}:`, error);
+      throw new Error(`Error connecting to ${API_URL}`);
     }
   }
 
@@ -73,6 +76,7 @@ export class API {
       return data;
     } catch (error) {
       console.error(`Error fetching data from ${API_URL}:`, error);
+      throw new Error(`Error connecting to ${API_URL}`);
     }
   }
 }
