@@ -56,22 +56,26 @@ export default async function CaseResult({ params }: { params: {case_id: string}
 	let caseData: any;
 	let errorMessage = '';
 
-	try {
-		const caseDataMessage = await CaseAPI.getCase(case_id)
-		// console.log('caseDataMessage=', caseDataMessage);
-		if (typeof caseDataMessage !== 'undefined' && typeof caseDataMessage.message !== 'undefined' && caseDataMessage.message.length) {
-			caseData = caseDataMessage.message[0];
-			// console.log('caseData=', caseData);
-		} else {
-			errorMessage = 'Case Not Found'
+	const fetchData = async () => {
+		try {
+			const caseDataMessage = await CaseAPI.getCase(case_id)
+			// console.log('caseDataMessage=', caseDataMessage);
+			if (typeof caseDataMessage !== 'undefined' && typeof caseDataMessage.message !== 'undefined' && caseDataMessage.message.length) {
+				caseData = caseDataMessage.message[0];
+				// console.log('caseData=', caseData);
+			} else {
+				errorMessage = 'Case Not Found'
+			}
+		} catch (error) {
+			errorMessage = (error as Error).message;
 		}
-	} catch (error) {
-		errorMessage = (error as Error).message;
-	}
+	};
+
+	await fetchData();
 
 	return (
 		<>
-			<h1 className="text-2xl leading-10">Case Result:</h1>
+			<h1 className="text-2xl leading-10"><a href="">Case Result:</a> <span className="text-sm"> <a href="">click to refresh</a></span></h1>
 			<hr/>
 			<div className="font-bold">Case ID: {case_id}</div>
 			{typeof caseData !== 'undefined' ? (
