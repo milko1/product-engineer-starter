@@ -29,7 +29,11 @@ class Status(Enum):
 
 class DataAccessLayer:
 
-    def get_case(self, case_id):
+    def __init__(self):
+        pass
+
+
+    async def get_case(self, case_id):
         """ Getting case data by matching case_id
 
         Args:
@@ -44,11 +48,11 @@ class DataAccessLayer:
         if len(cases) == 0: # case id not found
             return cases
 
-        case = self.get_case_sim(cases[0])
+        case = await self.get_case_sim(cases[0])
         return [case]
 
 
-    def get_case_sim(self, case):
+    async def get_case_sim(self, case):
         """ Getting case data for simulation
 
         Args:
@@ -76,12 +80,12 @@ class DataAccessLayer:
         return json_data
 
 
-    def get_cases(self):
+    async def get_cases(self):
         # return database # commenting it to apply simulation below to this endpoint too, as requested
         return [self.get_case_sim(case) for case in database]
 
 
-    def create_case(self):
+    async def create_case(self):
         case = {
             'case_id': str(uuid.uuid4()),
             'created_at': datetime.now(),
